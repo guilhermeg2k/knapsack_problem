@@ -24,21 +24,17 @@ func dynamicKnapsackSolve(items []Item, knapSackCapacity int) ([]Item, int, int)
 		}
 
 	}
-
 	currentLine := len(items)
 	currentColumn := knapSackCapacity
 	totalWeight := 0
 
-	for {
+	for currentLine > 0 && currentColumn > 0 {
 		if table[currentLine][currentColumn] != table[currentLine-1][currentColumn] {
 			knapsack = append(knapsack, items[currentLine-1])
 			totalWeight += items[currentLine-1].Weight
 			currentColumn -= items[currentLine-1].Weight
 		}
 		currentLine--
-		if currentLine < 1 || currentColumn < 1 {
-			break
-		}
 	}
 
 	return knapsack, table[len(items)][knapSackCapacity], totalWeight

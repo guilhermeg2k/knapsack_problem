@@ -25,8 +25,8 @@ func printItems(items []Item) {
 }
 
 func readItemsFromFile(filePath string) []Item {
-	file, err := os.ReadFile(filePath)
 	var items []Item
+	file, err := os.ReadFile(filePath)
 	if err != nil {
 		fmt.Println("Failed to read file")
 		panic(err)
@@ -78,14 +78,14 @@ func writeItemsToFile(filePath string, items []Item) {
 	file.Sync()
 }
 
-func generateItems(numberOfItems int) []Item {
+func generateItems(numberOfItems, maxWeight, maxValue int) []Item {
 	var items []Item
 	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < numberOfItems; i++ {
 		items = append(items, Item{
 			Index:         i,
-			Weight:        rand.Intn(numberOfItems) + 1,
-			Value:         rand.Intn(numberOfItems) + 1,
+			Weight:        rand.Intn(maxWeight) + 1,
+			Value:         rand.Intn(maxValue),
 			ValueByWeight: 0,
 		})
 	}
